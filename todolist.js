@@ -4,8 +4,8 @@
 // @version      1.12
 // @description  洛谷超级任务计划（第三方），不限题目数量
 // @author       Anguei, Legendword
-// @match        https://www.luogu.org/problemnew/show/*
-// @match        https://www.luogu.org/
+// @match        https://www.luogu.com.cn/problem/*
+// @match        https://www.luogu.com.cn/
 // @grant        GM_setValue
 // @grant        GM_getValue
 // ==/UserScript==
@@ -40,7 +40,7 @@ GM_setValue("myUid", myUid);
 
 function getOriginalList() {
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'https://www.luogu.org/', false);
+    xhr.open('GET', 'https://www.luogu.com.cn/', false);
     xhr.send(null);
     if (xhr.status == 200) {
         console.log('get original todo list: 200');
@@ -180,7 +180,7 @@ function updateMainPageList() {
             + color[state]
             + '">' + content[state]
             + '</strong></a>'
-            + '<a class="colored" style="padding-left: 3px" href="/problemnew/show/'
+            + '<a class="colored" style="padding-left: 3px" href="/problem/'
             + i
             + '" target="_blank"><b>'
             + i
@@ -219,10 +219,10 @@ function updateMainPageList() {
             // var problems = LuoguSuperTodolist.problems;
             var problems = {}; // for oier sp
             for (var i = 0; i < input.length; i++) {
-                if (!checkString(input[i])) {
-                    alert('输入数据不合法！')
-                    return false;
-                }
+                // if (!checkString(input[i])) {
+                // alert('输入数据不合法！')
+                // return false;
+                // }
                 input[i] = input[i].split(' # '); // 注意这里不能是单纯的井号
                 if (problems[input[i][0]] == undefined) {
                     problems[input[i][0]] = input[i][1];
@@ -392,7 +392,7 @@ function start() {
         syncList();
     }
     LuoguSuperTodolist.problems = GM_getValue('problems')
-    if (nowUrl == 'https://www.luogu.org/') {
+    if (nowUrl == 'https://www.luogu.com.cn/') {
         updateMainPageList(); // 更新主页的 todolist
     } else if (nowUrl.match(/problem/) != null) { // 题目页面运行脚本，添加按钮
         addButton();
